@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#myCanvasContainer {
+    display: flex;
+    position: relative;
+}
+
+#pause {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-image: url("images/play.png");
+    background-size: contain;
+}
+
+#pause.running {
+    background-image: url("images/pause.png");
+}
+
+#pause:hover {
+    cursor: pointer;
+}
+
+#pause.running:hover {
+    background-image: url("images/pause_r.png");
+}
+
+#pause:hover {
+    background-image: url("images/play_r.png");
+}
+
+#warp {
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    width: 24px;
+    height: 24px;
+    background-image: url("images/warp.png");
+    background-size: contain;
+}
+
+#warp:hover {
+    cursor: pointer;
+    background-image: url("images/warp_r.png");
+}
+
+#rotate {
+    position: absolute;
+    bottom: 0;
+    left: 48px;
+    width: 24px;
+    height: 24px;
+    background-image: url("images/rotate.png");
+    background-size: contain;
+}
+
+#rotate:hover {
+    cursor: pointer;
+    background-image: url("images/rotate_r.png");
+}
