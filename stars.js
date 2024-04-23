@@ -18,12 +18,15 @@ const d = 50;                       // distance entre l'observateur et "l'écran
 var X = [];		                    // vecteur des positions selon X multiplié par d
 var Y = [];		                    // vecteur des positions selon Y multiplié par d
 var Z = [];                         // vecteur des positions selon Z multiplié par d
-const Vmin = 200;                   // vitesse minimum des étoiles selon l'axe Z
+const Vmin = 100;                   // vitesse minimum des étoiles selon l'axe Z
 const Vmax = 4000;                  // vitesse maximum (warpDrive on) des étoiles selon l'axe Z
 var v = Vmin;                       // vitesse des étoiles selon Z
 const Acc = 200;                    // accélération pendant les phases de transition
-const W = 1280;	                    // largeur du domaine en pixels ("écran de projection")
-const H = 720;	                    // hauteur du domaine en pixels
+// const W = 1280;	                    // largeur du domaine en pixels ("écran de projection")
+// const H = 720;	                    // hauteur du domaine en pixels
+var mainDiv = document.getElementsByTagName("html")[0];
+const W = mainDiv.clientWidth;	// largeur du domaine
+const H = mainDiv.clientHeight;	// hauteur du domaine
 var xmax = z0 * W / (2 * d);        // borne max selon X du domaine visible ("au loin")
 var ymax = z0 * H / (2 * d);        // borne max selon Y du domaine visible ("au loin")
 const threshold = 100;              // seuil au centre, zone privée d'étoile
@@ -46,8 +49,9 @@ ctx.fillRect(0, 0, W, H);
 ctx.lineCap = 'round';
 
 for (index=0;index<N;index++) {
-    reinitialiserParticule(index);
+    reinitialiserParticule(index, true);
 }
+incrementer();
 
 /////////////////////////////
 // Fonctions et procédures //
@@ -57,7 +61,7 @@ for (index=0;index<N;index++) {
 // Fonction d'initialisation //
 ///////////////////////////////
 
-function reinitialiserParticule(index) {
+function reinitialiserParticule(index, random = false) {
     X[index] = (2*Math.random()-1) * (xmax) * d;
     Y[index] = (2*Math.random()-1) * (ymax) * d;
 
@@ -65,7 +69,12 @@ function reinitialiserParticule(index) {
         X[index] = (2*Math.random()-1) * (xmax) * d;
     }
 
-    Z[index] = z0;
+    if (random) {
+        Z[index] = Math.random() * z0;
+    } else {
+        Z[index] = z0;
+    }
+    
 }
 
 //////////////////////////
@@ -178,3 +187,7 @@ boutonRotate.addEventListener("click", onClickSurRotate, false);
 function onClickSurRotate() {
     rotate = !rotate;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    boutonPause.click();
+});
